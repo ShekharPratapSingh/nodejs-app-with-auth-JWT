@@ -1,13 +1,13 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
+const userRouter = require('./users/user.router')
 
-app.get('/', (req, res) => {
-    res.send('<h1>Hello Javascript</h1>')
-})
+app.use(express.json());
 
-app.listen(3000, (err) => {
-    if (err) throw err;
-    else {
-        console.log('Server is running at port 3000')
-    }
+app.use('/api/user', userRouter);
+
+app.listen(process.env.APP_PORT, () => {
+        console.log('Server is running at port:', process.env.APP_PORT);
+    
 })
